@@ -5,6 +5,7 @@ import { withStyles, createMuiTheme, MuiThemeProvider } from '@material-ui/core/
 import deepOrange from '@material-ui/core/colors/deepOrange';
 import teal from '@material-ui/core/colors/green';
 import Button from '@material-ui/core/Button';
+import NavigationIcon from '@material-ui/icons/Navigation';
 
 const theme = createMuiTheme({
   palette: {
@@ -57,7 +58,12 @@ const styles = theme => ({
   },
   listItemValue: {
       // color: deepOrange[50]
-  }
+  },
+  extendedIcon: {
+      marginRight: theme.spacing.unit,
+      // fontSize: '16px',
+      transform: 'rotate(90deg)'
+},
 });
 
 class Contact extends React.Component {
@@ -74,8 +80,11 @@ class Contact extends React.Component {
                         className={classes.gridContainer}
                         > <Grid item xs={6}>
                               <Paper className={classes.paper1}>
-                                  <h4 className={classes.title}>{name}</h4>
-                                  <Button color="secondary" className={classes.button}>Open</Button>
+                                  <h3 className={classes.title}>{name}</h3>
+                                      <Button color = "secondary" variant="extendedFab"  size="medium" className={classes.button}>
+                                          <NavigationIcon fontSize="small" className={classes.extendedIcon} />
+                                          Open
+                                      </Button>
                                   <Paper className={classes.paper2}>
                                       <ul className={classes.list}>
                                           <li className={classes.listItem}>

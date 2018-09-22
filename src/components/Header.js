@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography, Button, IconButton } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
+import deepOrange from '@material-ui/core/colors/deepOrange';
 
 const styles = {
   root: {
@@ -15,6 +16,13 @@ const styles = {
     marginLeft: -12,
     marginRight: 20,
   },
+  buttonList: {
+      display: 'flex',
+      listStyle: 'none',
+  },
+  buttonListItem: {
+      marginRight: '10px',
+  }
 };
 
 const header = (props) => {
@@ -23,7 +31,7 @@ const header = (props) => {
 
     return (
         <div className={classes.root}>
-            <AppBar position="static">
+            <AppBar color="secondary" position="static">
                 <Toolbar>
                   <IconButton className={classes.menuButton} color="inherit" aria-label="Home">
                     <HomeIcon />
@@ -31,15 +39,8 @@ const header = (props) => {
                   <Typography variant="title" color="inherit" className={classes.grow}>
                     {props.branding}
                   </Typography>
-                  <ul>
-                      <li>
-                          <a href="/">Home</a>
-                      </li>
-                      <li>
-                          <a href="/">Add contact</a>
-                      </li>
-                  </ul>
-                  <Button color="inherit">Add Contact</Button>
+                  <Button color="inherit">Home</Button>
+                  <Button color="inherit">Add Contact +</Button>
                 </Toolbar>
             </AppBar>
         </div>
