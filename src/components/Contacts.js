@@ -33,10 +33,11 @@ class Contacts extends React.Component {
         let { contacts } = this.state;
 
         return (
-            <div style = {{marginTop: 120}}>
+            <div>
                 {contacts.map(contact => {
                     return (
                         <Contact
+                            marginTop = { contact === contacts[0] ? {marginTop: '120px'} : null }
                             key = {contact.id}
                             contact = {contact}
                             />

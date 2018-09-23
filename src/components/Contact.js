@@ -41,11 +41,18 @@ const styles = theme => ({
     backgroundColor: deepOrange[50],
     overflow: 'hidden'
   },
+  contact: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(3, 1fr) minmax(60px, 80px)',
+      // alignItems: 'center',
+  },
   title: {
-      color: theme.palette.text.primary
+      color: theme.palette.text.primary,
+      gridColumn: '1 / 4',
   },
   button: {
-      alignSelf: 'flex-end'
+      gridColumn: '4 / 5',
+      alignSelf: 'end ',
   },
   list: {
       listStyle: 'none',
@@ -59,46 +66,73 @@ const styles = theme => ({
   },
   extendedIcon: {
       marginRight: theme.spacing.unit / 2,
-      fontSize: '16px',
-      transform: 'rotate(90deg)'
+      fontSize: '15px',
+      transform: 'rotate(180deg)'
 },
 });
 
 class Contact extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            showContactInfo: false
+        }
+    }
+
+
+    onShowCLick = event => {
+        this.setState(prevState => ({
+            showContactInfo: !prevState.showContactInfo
+        }));
+    }
+
     render () {
 
-        const { classes, contact } = this.props;
+        const { classes, contact, marginTop } = this.props;
+        const { showContactInfo } = this.state;
+
+        let contactInfo;
+
+        if (showContactInfo) {
+            contactInfo =
+                <Paper className = {classes.paper2}>
+                    <List component="nav" className = {classes.list}>
+                          <ListItem>
+                            <ListItemIcon>
+                              <DraftsIcon />
+                            </ListItemIcon>
+                            <ListItemText primary={`Email: ${contact.email}`} />
+                          </ListItem>
+                          <ListItem>
+                            <ListItemIcon>
+                              <PhoneIcon />
+                            </ListItemIcon>
+                            <ListItemText primary={`hone: ${contact.phone}`} />
+                          </ListItem>
+                      </List>
+                </Paper>;
+        } else {
+            contactInfo = null;
+        }
 
         return (
             <MuiThemeProvider theme={theme}>
-                <div className={classes.root}>
+                <div className = {classes.root}>
                     <Grid
                         container
                         spacing={24}
-                        className={classes.gridContainer}
-                        > <Grid item xs={5}>
-                              <Paper className={classes.paper1}>
-                                  <h2 className={classes.title}>{contact.name}</h2>
-                                      <Button color = "secondary" variant="extendedFab"  size="small" className={classes.button}>
-                                          <NavigationIcon fontSize="small" className={classes.extendedIcon} />
+                        className = {classes.gridContainer}
+                        style = {marginTop}
+                        > <Grid item xs={4}>
+                              <Paper className = {classes.paper1}>
+                                  <div className = {classes.contact}>
+                                      <h2 className = {classes.title}>{contact.name}</h2>
+                                      <Button onClick = {this.onShowCLick} color="secondary" variant="extendedFab"  size="small" className = {classes.button}>
+                                          <NavigationIcon fontSize="small" className = {classes.extendedIcon} />
                                           Open
                                       </Button>
-                                  <Paper className={classes.paper2}>
-                                      <List component="nav" className={classes.list}>
-                                            <ListItem>
-                                              <ListItemIcon>
-                                                <DraftsIcon />
-                                              </ListItemIcon>
-                                              <ListItemText primary={`Email: ${contact.email}`} />
-                                            </ListItem>
-                                            <ListItem>
-                                              <ListItemIcon>
-                                                <PhoneIcon />
-                                              </ListItemIcon>
-                                              <ListItemText primary={`hone: ${contact.phone}`} />
-                                            </ListItem>
-                                        </List>
-                                  </Paper>
+                                  </div>
+                                  {contactInfo}
                               </Paper>
                          </Grid>
                     </Grid>
