@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography, Button, IconButton } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
-import deepOrange from '@material-ui/core/colors/deepOrange';
 
 const styles = {
   root: {
@@ -31,7 +30,7 @@ const header = (props) => {
 
     return (
         <div className={classes.root}>
-            <AppBar color="secondary" position="static">
+            <AppBar color="secondary" position="fixed">
                 <Toolbar>
                   <IconButton className={classes.menuButton} color="inherit" aria-label="Home">
                     <HomeIcon />
