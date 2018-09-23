@@ -32,13 +32,20 @@ const header = (props) => {
 
     return (
         <div className={classes.root}>
-            <AppBar color="secondary" position="fixed">
-                <Toolbar>
-                  <IconButton className={classes.menuButton} aria-label="Home">
+            <AppBar
+              color="secondary"
+              position="fixed">
+                <Toolbar variant="dense">
+                  <IconButton
+                      className={classes.menuButton} 
+                      aria-label="Home">
                     <HomeIcon />
                   </IconButton>
-                  <Typography variant="title" color="inherit" className={classes.grow}>
-                    {props.branding}
+                  <Typography
+                      variant="title"
+                      color="inherit"
+                      className={classes.grow}
+                      >{props.branding}
                   </Typography>
                   <Button color="inherit">Add Contact +</Button>
                 </Toolbar>

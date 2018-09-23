@@ -13,7 +13,7 @@ class Contacts extends React.Component {
                         {value.contacts.map(contact => {
                             return (
                                 <Contact
-                                    marginTop = { contact === value.contacts[0] ? {marginTop: '120px'} : null }
+                                    marginTop = { contact === value.contacts[0] ? {marginTop: '100px'} : null }
                                     key = {contact.id}
                                     contact = {contact}
                                     />

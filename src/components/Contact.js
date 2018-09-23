@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { theme } from '../Styles/Theme'
-import { Paper, Grid, Button, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core'
+import { Paper, Grid, Button, List, ListItem, ListItemIcon, ListItemText, Tooltip, Zoom } from '@material-ui/core'
 import { withStyles, MuiThemeProvider } from '@material-ui/core/styles'
 import { deepOrange } from '@material-ui/core/colors'
 import NavigationIcon from '@material-ui/icons/Navigation'
@@ -32,7 +32,8 @@ const styles = theme => ({
   },
   contact: {
       display: 'grid',
-      gridTemplateColumns: 'minmax(10px, 20px) repeat(2, 1fr) minmax(60px, 80px)',
+      gridTemplateColumns: 'minmax(10px, 20px) repeat(2, minmax(60px, 1fr)) minmax(60px, 80px)',
+      gridTemplateRows: 'auto',
       // alignItems: 'center',
   },
   clearIcon: {
@@ -63,7 +64,13 @@ const styles = theme => ({
       fontSize: '15px',
       transition: 'all .2s ease',
       // transform: 'rotate(180deg)'
-},
+  },
+  lightTooltip: {
+    background: theme.palette.common.white,
+    color: theme.palette.text.primary,
+    boxShadow: theme.shadows[1],
+    fontSize: 12,
+  }
 });
 
 class Contact extends React.Component {
@@ -113,7 +120,7 @@ class Contact extends React.Component {
                             <ListItemText primary={`hone: ${contact.phone}`} />
                           </ListItem>
                       </List>
-                </Paper>;
+                </Paper>
         } else {
             contactInfo = null;
         }
@@ -131,15 +138,23 @@ class Contact extends React.Component {
                                     spacing={24}
                                     className = {classes.gridContainer}
                                     style = {marginTop}
-                                    > <Grid item xs={4}>
+                                    > <Grid item xs={10} sm={7} md={6} lg={4} xl={4}>
                                           <Paper className = {classes.paper1}>
                                               <div className = {classes.contact}>
-                                                  <ClearIcon
-                                                      color="primary"
-                                                      fontSize="small"
-                                                      className = {classes.clearIcon}
-                                                      onClick = {this.onDeleteClick.bind(this, contact.id, dispatch)}
-                                                       />
+                                                  <Tooltip
+                                                      classes = {{tooltip: classes.lightTooltip}}
+                                                      title="Delete ?"
+                                                      placement="bottom-start"
+                                                      TransitionComponent={Zoom}
+                                                      TransitionProps={{ timeout: 400 }}
+                                                      enterDelay={200}>
+                                                      <ClearIcon
+                                                          color="primary"
+                                                          fontSize="small"
+                                                          className = {classes.clearIcon}
+                                                          onClick = {this.onDeleteClick.bind(this, contact.id, dispatch)}
+                                                           />
+                                                   </Tooltip>
                                                   <h2 className = {classes.title}>{contact.name}</h2>
                                                   <Button
                                                       onClick = {this.onShowCLick}
