@@ -39,7 +39,7 @@ const styles = theme => ({
     // padding: theme.spacing.unit * 2,
     marginTop: '15px',
     backgroundColor: deepOrange[50],
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
   contact: {
       display: 'grid',
@@ -67,7 +67,8 @@ const styles = theme => ({
   extendedIcon: {
       marginRight: theme.spacing.unit / 2,
       fontSize: '15px',
-      transform: 'rotate(180deg)'
+      transition: 'all .2s ease',
+      // transform: 'rotate(180deg)'
 },
 });
 
@@ -90,6 +91,8 @@ class Contact extends React.Component {
 
         const { classes, contact, marginTop } = this.props;
         const { showContactInfo } = this.state;
+
+        let navigationIcon = !showContactInfo ? {transform: 'rotate(180deg)'} : {transform: 'rotate(360deg)'}
 
         let contactInfo;
 
@@ -127,8 +130,17 @@ class Contact extends React.Component {
                               <Paper className = {classes.paper1}>
                                   <div className = {classes.contact}>
                                       <h2 className = {classes.title}>{contact.name}</h2>
-                                      <Button onClick = {this.onShowCLick} color="secondary" variant="extendedFab"  size="small" className = {classes.button}>
-                                          <NavigationIcon fontSize="small" className = {classes.extendedIcon} />
+                                      <Button
+                                          onClick = {this.onShowCLick}
+                                          color="secondary"
+                                          variant="extendedFab"
+                                          size="small"
+                                          className = {classes.button}>
+                                          <NavigationIcon
+                                              fontSize="small"
+                                              className = {classes.extendedIcon}
+                                              style = {navigationIcon}
+                                              />
                                           Open
                                       </Button>
                                   </div>
