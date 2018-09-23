@@ -1,12 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
+import { Paper, Grid, Button, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import { withStyles, createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
-import deepOrange from '@material-ui/core/colors/deepOrange';
-import teal from '@material-ui/core/colors/green';
-import Button from '@material-ui/core/Button';
+import { deepOrange, teal } from '@material-ui/core/colors';
 import NavigationIcon from '@material-ui/icons/Navigation';
+import PhoneIcon from '@material-ui/icons/Phone';
+import DraftsIcon from '@material-ui/icons/Drafts';
 
 const theme = createMuiTheme({
   palette: {
@@ -77,7 +76,7 @@ class Contact extends React.Component {
                         container
                         spacing={24}
                         className={classes.gridContainer}
-                        > <Grid item xs={6}>
+                        > <Grid item xs={5}>
                               <Paper className={classes.paper1}>
                                   <h2 className={classes.title}>{contact.name}</h2>
                                       <Button color = "secondary" variant="extendedFab"  size="small" className={classes.button}>
@@ -85,14 +84,20 @@ class Contact extends React.Component {
                                           Open
                                       </Button>
                                   <Paper className={classes.paper2}>
-                                      <ul className={classes.list}>
-                                          <li className={classes.listItem}>
-                                              Email: <span className={classes.listItemValue}>{contact.email}</span>
-                                          </li>
-                                          <li className={classes.listItem}>
-                                              Phone: <span className={classes.listItemValue}>{contact.phone}</span>
-                                          </li>
-                                      </ul>
+                                      <List component="nav" className={classes.list}>
+                                            <ListItem>
+                                              <ListItemIcon>
+                                                <DraftsIcon />
+                                              </ListItemIcon>
+                                              <ListItemText primary={`Email: ${contact.email}`} />
+                                            </ListItem>
+                                            <ListItem>
+                                              <ListItemIcon>
+                                                <PhoneIcon />
+                                              </ListItemIcon>
+                                              <ListItemText primary={`hone: ${contact.phone}`} />
+                                            </ListItem>
+                                        </List>
                                   </Paper>
                               </Paper>
                          </Grid>
