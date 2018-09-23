@@ -1,8 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Typography, Button, IconButton } from '@material-ui/core';
-import HomeIcon from '@material-ui/icons/Home';
+import { theme } from '../Styles/Theme'
+import { withStyles } from '@material-ui/core/styles'
+import { AppBar, Toolbar, Typography, Button, IconButton } from '@material-ui/core'
+import HomeIcon from '@material-ui/icons/Home'
 
 const styles = {
   root: {
@@ -14,6 +15,7 @@ const styles = {
   menuButton: {
     marginLeft: -12,
     marginRight: 20,
+    color: theme.palette.secondary.main
   },
   buttonList: {
       display: 'flex',
@@ -32,7 +34,7 @@ const header = (props) => {
         <div className={classes.root}>
             <AppBar color="secondary" position="fixed">
                 <Toolbar>
-                  <IconButton className={classes.menuButton} color="inherit" aria-label="Home">
+                  <IconButton className={classes.menuButton} aria-label="Home">
                     <HomeIcon />
                   </IconButton>
                   <Typography variant="title" color="inherit" className={classes.grow}>

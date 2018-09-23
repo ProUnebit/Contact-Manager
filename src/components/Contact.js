@@ -1,25 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Paper, Grid, Button, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
-import { withStyles, createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
-import { deepOrange, teal } from '@material-ui/core/colors';
-import NavigationIcon from '@material-ui/icons/Navigation';
-import PhoneIcon from '@material-ui/icons/Phone';
-import DraftsIcon from '@material-ui/icons/Drafts';
-
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-    light: deepOrange[300],
-    main: deepOrange[400],
-    dark: deepOrange[700],
-    contrastText: '#fff',
-    },
-    secondary: {
-      main: teal['A400'],
-    },
-  },
-});
+import { theme } from '../Styles/Theme'
+import { Paper, Grid, Button, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core'
+import { withStyles, MuiThemeProvider } from '@material-ui/core/styles'
+import { deepOrange } from '@material-ui/core/colors'
+import NavigationIcon from '@material-ui/icons/Navigation'
+import PhoneIcon from '@material-ui/icons/Phone'
+import DraftsIcon from '@material-ui/icons/Drafts'
 
 const styles = theme => ({
   root: {
@@ -65,7 +52,7 @@ const styles = theme => ({
       // color: deepOrange[50]
   },
   extendedIcon: {
-      marginRight: theme.spacing.unit / 2,
+      // marginRight: theme.spacing.unit / 2,
       fontSize: '15px',
       transition: 'all .2s ease',
       // transform: 'rotate(180deg)'
@@ -92,7 +79,10 @@ class Contact extends React.Component {
         const { classes, contact, marginTop } = this.props;
         const { showContactInfo } = this.state;
 
-        let navigationIcon = !showContactInfo ? {transform: 'rotate(180deg)'} : {transform: 'rotate(360deg)'}
+        let navigationIcon = !showContactInfo ?
+        {transform: 'rotate(180deg)', marginRight: theme.spacing.unit / 2}
+        :
+        {transform: 'rotate(360deg)', marginRight: theme.spacing.unit * 1.4}
 
         let contactInfo;
 
@@ -141,7 +131,7 @@ class Contact extends React.Component {
                                               className = {classes.extendedIcon}
                                               style = {navigationIcon}
                                               />
-                                          Open
+                                          {!showContactInfo ? 'Show' : 'Hide'}
                                       </Button>
                                   </div>
                                   {contactInfo}

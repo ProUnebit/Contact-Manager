@@ -33,7 +33,7 @@ class Contacts extends React.Component {
         let { contacts } = this.state;
 
         return (
-            <div>
+            <div style = {{height: '100vh', overflowX: 'hidden'}}>
                 {contacts.map(contact => {
                     return (
                         <Contact
