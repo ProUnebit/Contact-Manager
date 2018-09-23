@@ -40,7 +40,6 @@ const header = (props) => {
                   <Typography variant="title" color="inherit" className={classes.grow}>
                     {props.branding}
                   </Typography>
-                  <Button color="inherit">Home</Button>
                   <Button color="inherit">Add Contact +</Button>
                 </Toolbar>
             </AppBar>

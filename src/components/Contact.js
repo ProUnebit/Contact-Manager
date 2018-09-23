@@ -8,6 +8,7 @@ import NavigationIcon from '@material-ui/icons/Navigation'
 import PhoneIcon from '@material-ui/icons/Phone'
 import DraftsIcon from '@material-ui/icons/Drafts'
 import ClearIcon from '@material-ui/icons/Clear'
+import { Consumer } from '../context'
 
 const styles = theme => ({
   root: {
@@ -37,6 +38,7 @@ const styles = theme => ({
   clearIcon: {
       gridColumn: '1 / 2',
       cursor: 'pointer',
+      alignSelf: 'start',
   },
   title: {
       color: theme.palette.text.primary,
@@ -44,7 +46,7 @@ const styles = theme => ({
   },
   button: {
       gridColumn: '4 / 5',
-      alignSelf: 'end ',
+      alignSelf: 'end',
   },
   list: {
       listStyle: 'none',
@@ -72,11 +74,14 @@ class Contact extends React.Component {
         }
     }
 
-
-    onShowCLick = event => {
+    onShowCLick = () => {
         this.setState(prevState => ({
             showContactInfo: !prevState.showContactInfo
         }));
+    }
+
+    onDeleteClick = (id, dispatch) => {
+        dispatch({type: 'DELETE_CONTACT', payload: id})
     }
 
     render () {
@@ -114,49 +119,56 @@ class Contact extends React.Component {
         }
 
         return (
-            <MuiThemeProvider theme={theme}>
-                <div className = {classes.root}>
-                    <Grid
-                        container
-                        spacing={24}
-                        className = {classes.gridContainer}
-                        style = {marginTop}
-                        > <Grid item xs={4}>
-                              <Paper className = {classes.paper1}>
-                                  <div className = {classes.contact}>
-                                      <ClearIcon
-                                          color="primary"
-                                          fontSize="small"
-                                          className = {classes.clearIcon}
-                                          onClick = {() => console.log(123)}
-                                           />
-                                      <h2 className = {classes.title}>{contact.name}</h2>
-                                      <Button
-                                          onClick = {this.onShowCLick}
-                                          color="secondary"
-                                          variant="extendedFab"
-                                          size="small"
-                                          className = {classes.button}>
-                                          <NavigationIcon
-                                              fontSize="small"
-                                              className = {classes.extendedIcon}
-                                              style = {navigationIcon}
-                                              />
-                                          {!showContactInfo ? 'Show' : 'Hide'}
-                                      </Button>
-                                  </div>
-                                  {contactInfo}
-                              </Paper>
-                         </Grid>
-                    </Grid>
-                </div>
-            </MuiThemeProvider>
+
+            <Consumer>
+                {value => {
+                    const { dispatch } = value;
+                    return (
+                        <MuiThemeProvider theme={theme}>
+                            <div className = {classes.root}>
+                                <Grid
+                                    container
+                                    spacing={24}
+                                    className = {classes.gridContainer}
+                                    style = {marginTop}
+                                    > <Grid item xs={4}>
+                                          <Paper className = {classes.paper1}>
+                                              <div className = {classes.contact}>
+                                                  <ClearIcon
+                                                      color="primary"
+                                                      fontSize="small"
+                                                      className = {classes.clearIcon}
+                                                      onClick = {this.onDeleteClick.bind(this, contact.id, dispatch)}
+                                                       />
+                                                  <h2 className = {classes.title}>{contact.name}</h2>
+                                                  <Button
+                                                      onClick = {this.onShowCLick}
+                                                      color="secondary"
+                                                      variant="extendedFab"
+                                                      size="small"
+                                                      className = {classes.button}>
+                                                      <NavigationIcon
+                                                          fontSize="small"
+                                                          className = {classes.extendedIcon}
+                                                          style = {navigationIcon}
+                                                          />
+                                                      {!showContactInfo ? 'Show' : 'Hide'}
+                                                  </Button>
+                                              </div>
+                                              {contactInfo}
+                                          </Paper>
+                                     </Grid>
+                                </Grid>
+                            </div>
+                        </MuiThemeProvider>
+                    )}}
+            </Consumer>
         )
     }
 }
 
 Contact.propTypes = {
-    contact: PropTypes.object.isRequired,
+    contact: PropTypes.object.isRequired
 }
 
 export default withStyles(styles)(Contact);
