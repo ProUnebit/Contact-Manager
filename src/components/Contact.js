@@ -7,6 +7,7 @@ import { deepOrange } from '@material-ui/core/colors'
 import NavigationIcon from '@material-ui/icons/Navigation'
 import PhoneIcon from '@material-ui/icons/Phone'
 import DraftsIcon from '@material-ui/icons/Drafts'
+import ClearIcon from '@material-ui/icons/Clear'
 
 const styles = theme => ({
   root: {
@@ -30,12 +31,16 @@ const styles = theme => ({
   },
   contact: {
       display: 'grid',
-      gridTemplateColumns: 'repeat(3, 1fr) minmax(60px, 80px)',
+      gridTemplateColumns: 'minmax(10px, 20px) repeat(2, 1fr) minmax(60px, 80px)',
       // alignItems: 'center',
+  },
+  clearIcon: {
+      gridColumn: '1 / 2',
+      cursor: 'pointer',
   },
   title: {
       color: theme.palette.text.primary,
-      gridColumn: '1 / 4',
+      gridColumn: '2 / 4',
   },
   button: {
       gridColumn: '4 / 5',
@@ -119,6 +124,12 @@ class Contact extends React.Component {
                         > <Grid item xs={4}>
                               <Paper className = {classes.paper1}>
                                   <div className = {classes.contact}>
+                                      <ClearIcon
+                                          color="primary"
+                                          fontSize="small"
+                                          className = {classes.clearIcon}
+                                          onClick = {() => console.log(123)}
+                                           />
                                       <h2 className = {classes.title}>{contact.name}</h2>
                                       <Button
                                           onClick = {this.onShowCLick}
