@@ -35,6 +35,12 @@ export class Provider extends React.Component {
                 name: 'Brad Traversy',
                 email: 'btraversy@gmail.com',
                 phone: '777-77-7777'
+            },
+            {
+                id: 4,
+                name: 'Alexey Ratnikov',
+                email: 'aratnikov@gmail.com',
+                phone: '888-88-8888'
             }
         ],
         dispatch: action => this.setState(state => reducer(state, action))

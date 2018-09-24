@@ -1,5 +1,8 @@
 import React from 'react'
 import Contact from './Contact'
+import SimpleBar from 'simplebar-react';
+import 'simplebar/dist/simplebar.min.css';
+import '../Styles/index.css';
 import { Consumer } from '../context'
 
 class Contacts extends React.Component {
@@ -9,7 +12,7 @@ class Contacts extends React.Component {
         return (
             <Consumer>
                 {value => (
-                    <div style = {{height: '100vh', overflowX: 'hidden'}}>
+                    <SimpleBar style = {{height: '100vh'}}>
                         {value.contacts.map(contact => {
                             return (
                                 <Contact
@@ -19,7 +22,7 @@ class Contacts extends React.Component {
                                     />
                             )
                         })}
-                    </div>
+                    </SimpleBar>
                     )
                 }
             </Consumer>

@@ -4,3 +4,17 @@ body {
     box-sizing: border-box;
     font-family: 'Roboto';
 }
+
+.simplebar-scrollbar {
+    /* background-color: #1DE9B6; */
+    /* border-radius: 7px; */
+    margin-right: 2px;
+}
+
+.simplebar-track.vertical {
+    /* background-color: #f50057; */
+}
+
+.simplebar-track.horizontal {
+    display: none;
+}

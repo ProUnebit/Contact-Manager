@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { theme } from '../Styles/Theme'
-import { Paper, Grid, Button, List, ListItem, ListItemIcon, ListItemText, Tooltip, Zoom } from '@material-ui/core'
+import { Paper, Grid, Button, List, ListItem, ListItemIcon, ListItemText, Tooltip, Zoom, Hidden } from '@material-ui/core'
 import { withStyles, MuiThemeProvider } from '@material-ui/core/styles'
 import { deepOrange } from '@material-ui/core/colors'
 import NavigationIcon from '@material-ui/icons/Navigation'
@@ -108,16 +108,20 @@ class Contact extends React.Component {
                 <Paper className = {classes.paper2}>
                     <List component="nav" className = {classes.list}>
                           <ListItem>
-                            <ListItemIcon>
-                              <DraftsIcon />
-                            </ListItemIcon>
+                              <Hidden xsDown>
+                                <ListItemIcon>
+                                  <DraftsIcon />
+                                </ListItemIcon>
+                              </Hidden>
                             <ListItemText primary={`Email: ${contact.email}`} />
                           </ListItem>
                           <ListItem>
-                            <ListItemIcon>
-                              <PhoneIcon />
-                            </ListItemIcon>
-                            <ListItemText primary={`hone: ${contact.phone}`} />
+                              <Hidden xsDown>
+                                <ListItemIcon>
+                                  <PhoneIcon />
+                                </ListItemIcon>
+                               </Hidden>
+                            <ListItemText primary={`Phone: ${contact.phone}`} />
                           </ListItem>
                       </List>
                 </Paper>
