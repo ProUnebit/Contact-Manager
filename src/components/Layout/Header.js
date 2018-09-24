@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+// import { Link } from 'react-router-dom'
 import { theme } from '../../Styles/Theme'
 import { withStyles } from '@material-ui/core/styles'
 import { AppBar, Toolbar, Typography, Button, IconButton } from '@material-ui/core'
@@ -54,6 +55,8 @@ const header = (props) => {
         </div>
     )
 }
+
+// <Button component={Link} to="/add-contact" color="inherit">Add Contact +</Button>
 
 header.defaultProps = {
     branding: 'My App'
