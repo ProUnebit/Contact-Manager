@@ -3,8 +3,8 @@ body {
     padding: 0;
     box-sizing: border-box;
     font-family: 'Roboto';
-    background: linear-gradient( #bbb, transparent 1px), linear-gradient( 90deg, #bbb, transparent 1px);
-    background-size: 15px 15px;
+    background: linear-gradient( #bbb, transparent 1px), linear-gradient( 90deg, #ccc, transparent 1px);
+    background-size: 16px 16px;
     background-position: center center;
 }
 
