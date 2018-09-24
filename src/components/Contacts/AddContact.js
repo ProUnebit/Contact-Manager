@@ -1,8 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import MaskedInput from 'react-text-mask'
 import { theme } from '../../Styles/Theme'
 import { withStyles, MuiThemeProvider } from '@material-ui/core/styles'
-import { Grid, Paper, Button, Typography, TextField, MenuItem } from '@material-ui/core'
+import { Grid, Paper, Button, Typography, TextField, MenuItemt } from '@material-ui/core'
 
 const styles = theme => ({
   gridContainer: {
@@ -37,6 +38,20 @@ const styles = theme => ({
   },
 });
 
+function TextMaskCustom(props) {
+  const { inputRef, ...other } = props;
+
+  return (
+    <MaskedInput
+      {...other}
+      ref={inputRef}
+      mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/]}
+      placeholderChar={'\u2000'}
+      showMask
+    />
+  );
+}
+
 class AddContact extends React.Component {
 
     state = {
@@ -63,7 +78,7 @@ class AddContact extends React.Component {
                     container
                     spacing={24}
                     className = {classes.gridContainer}>
-                    <Grid item xs={10} sm={7} md={6} lg={5} xl={5}>
+                    <Grid item xs={10} sm={7} md={6} lg={6} xl={6}>
                         <Paper className = {classes.paper}>
                             <div className = {classes.formHeadline}>
                                 <Typography
