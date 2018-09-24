@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { theme } from '../Styles/Theme'
+import { theme } from '../../Styles/Theme'
 import { withStyles } from '@material-ui/core/styles'
 import { AppBar, Toolbar, Typography, Button, IconButton } from '@material-ui/core'
 import HomeIcon from '@material-ui/icons/Home'
@@ -8,6 +8,7 @@ import HomeIcon from '@material-ui/icons/Home'
 const styles = {
   root: {
     flexGrow: 1,
+    marginBottom: '2px',
   },
   grow: {
     flexGrow: 1,
@@ -34,10 +35,10 @@ const header = (props) => {
         <div className={classes.root}>
             <AppBar
               color="secondary"
-              position="fixed">
+              position="static">
                 <Toolbar variant="dense">
                   <IconButton
-                      className={classes.menuButton} 
+                      className={classes.menuButton}
                       aria-label="Home">
                     <HomeIcon />
                   </IconButton>

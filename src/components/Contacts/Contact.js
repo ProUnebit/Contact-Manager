@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { theme } from '../Styles/Theme'
+import { theme } from '../../Styles/Theme'
 import { Paper, Grid, Button, List, ListItem, ListItemIcon, ListItemText, Tooltip, Zoom, Hidden } from '@material-ui/core'
 import { withStyles, MuiThemeProvider } from '@material-ui/core/styles'
 import { deepOrange } from '@material-ui/core/colors'
@@ -8,7 +8,7 @@ import NavigationIcon from '@material-ui/icons/Navigation'
 import PhoneIcon from '@material-ui/icons/Phone'
 import DraftsIcon from '@material-ui/icons/Drafts'
 import ClearIcon from '@material-ui/icons/Clear'
-import { Consumer } from '../context'
+import { Consumer } from '../../context'
 
 const styles = theme => ({
   root: {
@@ -25,7 +25,6 @@ const styles = theme => ({
     color: theme.palette.text.secondary,
   },
   paper2: {
-    // padding: theme.spacing.unit * 2,
     marginTop: '15px',
     backgroundColor: deepOrange[50],
     overflow: 'hidden',
@@ -34,7 +33,6 @@ const styles = theme => ({
       display: 'grid',
       gridTemplateColumns: 'minmax(10px, 20px) repeat(2, minmax(60px, 1fr)) minmax(60px, 80px)',
       gridTemplateRows: 'auto',
-      // alignItems: 'center',
   },
   clearIcon: {
       gridColumn: '1 / 2',
@@ -57,13 +55,11 @@ const styles = theme => ({
       // color: theme.palette.primary.contrastText,
   },
   listItemValue: {
-      // color: deepOrange[50]
+
   },
   extendedIcon: {
-      // marginRight: theme.spacing.unit / 2,
       fontSize: '15px',
       transition: 'all .2s ease',
-      // transform: 'rotate(180deg)'
   },
   lightTooltip: {
     background: theme.palette.common.white,
