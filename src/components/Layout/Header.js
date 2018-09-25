@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { theme } from '../../Styles/Theme'
 import { withStyles } from '@material-ui/core/styles'
 import { AppBar, Toolbar, Typography, Button, IconButton } from '@material-ui/core'
-import HomeIcon from '@material-ui/icons/Home'
+import { Home, PersonAdd, ContactSupport } from '@material-ui/icons'
 
 const styles = {
   root: {
@@ -43,7 +43,7 @@ const header = (props) => {
                       to="/"
                       aria-label="Home"
                       className={classes.menuButton}>
-                    <HomeIcon />
+                    <Home />
                   </IconButton>
                   <Typography
                       variant="title"
@@ -55,13 +55,15 @@ const header = (props) => {
                       component={Link}
                       to="/contact/add"
                       color="inherit"
-                      >Add Contact +
+                      >Add Contact
+                      <PersonAdd style={{ fontSize: 16, marginLeft: 6 }} />
                   </Button>
                   <Button
                       component={Link}
                       to="/about"
                       color="inherit"
                       >About
+                      <ContactSupport style={{ fontSize: 16, marginLeft: 6 }} />
                   </Button>
                 </Toolbar>
             </AppBar>

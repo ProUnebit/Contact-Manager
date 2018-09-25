@@ -4,6 +4,7 @@ import Contacts from './components/Contacts/Contacts'
 import AddContact from './components/Contacts/AddContact'
 import Header from './components/Layout/Header'
 import About from './components/pages/About'
+import NotFound from './components/pages/NotFound'
 import { Provider } from './context'
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
@@ -22,6 +23,7 @@ class App extends Component {
                             <Route exact path="/" component = {Contacts}/>
                             <Route exact path="/contact/add" component = {AddContact}/>
                             <Route exact path="/about" component = {About}/>
+                            <Route component = {NotFound}/>
                         </Switch>
                     </SimpleBar>
                 </div>

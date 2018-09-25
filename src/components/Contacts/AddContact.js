@@ -81,13 +81,15 @@ class AddContact extends React.Component {
         }
 
         dispatch({type: 'ADD_CONTACT', payload: newContact})
-
+        // clear state under form-submit
         this.setState({
             name: '',
             sex: '',
             email: '',
             phone: '(   )    -    ',
         });
+        // Redirect url after submit
+        this.props.history.push('/');
     }
 
     render () {

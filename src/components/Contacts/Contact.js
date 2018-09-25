@@ -4,11 +4,7 @@ import { theme } from '../../Styles/Theme'
 import { Paper, Grid, Button, List, ListItem, ListItemIcon, ListItemText, Tooltip, Zoom, Hidden } from '@material-ui/core'
 import { withStyles, MuiThemeProvider } from '@material-ui/core/styles'
 import { deepOrange } from '@material-ui/core/colors'
-import NavigationIcon from '@material-ui/icons/Navigation'
-import PhoneIcon from '@material-ui/icons/Phone'
-import DraftsIcon from '@material-ui/icons/Drafts'
-import ClearIcon from '@material-ui/icons/Clear'
-import PersonIcon from '@material-ui/icons/Person'
+import { Phone, Drafts, Clear, Person, ExpandLess } from '@material-ui/icons'
 import { Consumer } from '../../context'
 
 const styles = theme => ({
@@ -35,7 +31,7 @@ const styles = theme => ({
       gridTemplateColumns: 'minmax(10px, 20px) repeat(2, minmax(60px, 1fr)) minmax(60px, 80px)',
       gridTemplateRows: 'auto',
   },
-  clearIcon: {
+  Clear: {
       gridColumn: '1 / 2',
       cursor: 'pointer',
       alignSelf: 'start',
@@ -56,7 +52,7 @@ const styles = theme => ({
       // color: theme.palette.primary.contrastText,
   },
   extendedIcon: {
-      fontSize: '15px',
+      fontSize: '20px',
       transition: 'all .2s ease',
   },
   lightTooltip: {
@@ -91,9 +87,9 @@ class Contact extends React.Component {
         const { showContactInfo } = this.state;
 
         let navigationIcon = !showContactInfo ?
-        {transform: 'rotate(180deg)', marginRight: theme.spacing.unit / 2}
+        {transform: 'rotate(180deg)', marginRight: theme.spacing.unit / 1.8}
         :
-        {transform: 'rotate(360deg)', marginRight: theme.spacing.unit * 1.4}
+        {transform: 'rotate(360deg)', marginRight: theme.spacing.unit * 1.08}
 
         let contactInfo;
 
@@ -105,7 +101,7 @@ class Contact extends React.Component {
                             <ListItem>
                                 <Hidden xsDown>
                                   <ListItemIcon>
-                                    <PersonIcon />
+                                    <Person />
                                   </ListItemIcon>
                                 </Hidden>
                                 <ListItemText primary={`Sex: ${contact.sex}`} />
@@ -116,7 +112,7 @@ class Contact extends React.Component {
                           <ListItem>
                               <Hidden xsDown>
                                 <ListItemIcon>
-                                  <DraftsIcon />
+                                  <Drafts />
                                 </ListItemIcon>
                               </Hidden>
                             <ListItemText primary={`Email: ${contact.email}`} />
@@ -125,7 +121,7 @@ class Contact extends React.Component {
                               <ListItem>
                                   <Hidden xsDown>
                                     <ListItemIcon>
-                                      <PhoneIcon />
+                                      <Phone />
                                     </ListItemIcon>
                                    </Hidden>
                                 <ListItemText primary={`Phone: ${contact.phone}`} />
@@ -162,10 +158,10 @@ class Contact extends React.Component {
                                                       TransitionComponent={Zoom}
                                                       TransitionProps={{ timeout: 400 }}
                                                       enterDelay={200}>
-                                                      <ClearIcon
+                                                      <Clear
                                                           color="primary"
                                                           fontSize="small"
-                                                          className = {classes.clearIcon}
+                                                          className = {classes.Clear}
                                                           onClick = {this.onDeleteClick.bind(this, contact.id, dispatch)}
                                                            />
                                                    </Tooltip>
@@ -176,7 +172,7 @@ class Contact extends React.Component {
                                                       variant="extendedFab"
                                                       size="small"
                                                       className = {classes.button}>
-                                                      <NavigationIcon
+                                                      <ExpandLess
                                                           fontSize="small"
                                                           className = {classes.extendedIcon}
                                                           style = {navigationIcon}
