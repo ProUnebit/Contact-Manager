@@ -55,9 +55,6 @@ const styles = theme => ({
   listItem: {
       // color: theme.palette.primary.contrastText,
   },
-  listItemValue: {
-
-  },
   extendedIcon: {
       fontSize: '15px',
       transition: 'all .2s ease',
@@ -124,14 +121,18 @@ class Contact extends React.Component {
                               </Hidden>
                             <ListItemText primary={`Email: ${contact.email}`} />
                           </ListItem>
-                          <ListItem>
-                              <Hidden xsDown>
-                                <ListItemIcon>
-                                  <PhoneIcon />
-                                </ListItemIcon>
-                               </Hidden>
-                            <ListItemText primary={`Phone: ${contact.phone}`} />
-                          </ListItem>
+                          {contact.phone !== undefined && contact.phone !== '(   )    -    ' ?
+                              <ListItem>
+                                  <Hidden xsDown>
+                                    <ListItemIcon>
+                                      <PhoneIcon />
+                                    </ListItemIcon>
+                                   </Hidden>
+                                <ListItemText primary={`Phone: ${contact.phone}`} />
+                              </ListItem>
+                              :
+                              null
+                          }
                       </List>
                 </Paper>
         } else {

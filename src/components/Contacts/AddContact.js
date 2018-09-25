@@ -74,13 +74,11 @@ class AddContact extends React.Component {
     handleSubmit = (dispatch, event) => {
         // Submited form, generated ID and pushed 'newContact' to STORE
         event.preventDefault();
-        
+
         const newContact = {
             ...this.state,
             id: ([this.state.name] + '-' + (Math.random() * 10).toFixed(5).split('.').join('')).split(' ').join('')
         }
-
-        console.log(newContact)
 
         dispatch({type: 'ADD_CONTACT', payload: newContact})
 
@@ -162,7 +160,6 @@ class AddContact extends React.Component {
                                                 />
                                             <FormControl
                                                 name="phone"
-                                                required
                                                 margin="normal"
                                                 style = {{width: 'calc(50% - 15px)', verticalAlign: 'top'}}>
                                               <InputLabel htmlFor="formatted-text-mask-input">Phone</InputLabel>
