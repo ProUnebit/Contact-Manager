@@ -79,6 +79,16 @@ class AddContact extends React.Component {
     });
     };
 
+    handleSubmit = event => {
+        // Submited form and generated ID
+        event.preventDefault();
+        const newContact = {
+            ...this.state,
+            id: ([this.state.name] + '-' + (Math.random() * 10).toFixed(5).split('.').join('')).split(' ').join('')
+        }
+        console.log(newContact)
+    }
+
     render () {
 
         let { classes } = this.props;
@@ -104,10 +114,12 @@ class AddContact extends React.Component {
                                 </ListItemIcon>
                             </div>
                             <form
+                                onSubmit = {this.handleSubmit}
                                 autoComplete="off"
                                 className = {classes.form}>
                                 <TextField
                                     name="name"
+                                    type="text"
                                     autoFocus
                                     onChange={this.handleChange('name')}
                                     required
@@ -148,6 +160,7 @@ class AddContact extends React.Component {
                                     />
                                 <FormControl
                                     name="phone"
+                                    required
                                     className={classes.formControl}
                                     margin="normal"
                                     style = {{width: 'calc(50% - 15px)', verticalAlign: 'top'}}>
@@ -160,6 +173,7 @@ class AddContact extends React.Component {
                                 <FormHelperText>Enter the contact phone</FormHelperText>
                                 </FormControl>
                                 <Button
+                                    type="submit"
                                     disabled = {false}
                                     variant="flat"
                                     size="large"
