@@ -1,7 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import MaskedInput from 'react-text-mask'
+import { Consumer } from '../../context'
 import { theme } from '../../Styles/Theme'
+import BorderColorIcon from '@material-ui/icons/BorderColor'
 import { withStyles, MuiThemeProvider } from '@material-ui/core/styles'
 import {
     Grid,
@@ -16,7 +18,6 @@ import {
     ListItemIcon,
     FormHelperText
 } from '@material-ui/core'
-import BorderColorIcon from '@material-ui/icons/BorderColor'
 
 const styles = theme => ({
   gridContainer: {
@@ -79,14 +80,23 @@ class AddContact extends React.Component {
     });
     };
 
-    handleSubmit = event => {
-        // Submited form and generated ID
+    handleSubmit = (dispatch, event) => {
+        // Submited form, generated ID and pushed 'newContact' to STORE
         event.preventDefault();
         const newContact = {
             ...this.state,
             id: ([this.state.name] + '-' + (Math.random() * 10).toFixed(5).split('.').join('')).split(' ').join('')
         }
         console.log(newContact)
+
+        dispatch({type: 'ADD_CONTACT', payload: newContact})
+
+        this.setState({
+            name: '',
+            sex: '',
+            email: '',
+            phone: '(   )    -    ',
+        });
     }
 
     render () {
@@ -95,98 +105,104 @@ class AddContact extends React.Component {
         let { name, sex, email, phone } = this.state;
 
         return (
-            <MuiThemeProvider theme={theme}>
-                <Grid
-                    container
-                    spacing={24}
-                    className = {classes.gridContainer}>
-                    <Grid item xs={10} sm={7} md={6} lg={5} xl={5}>
-                        <Paper className = {classes.paper}>
-                            <div className = {classes.formHeadline}>
-                                <Typography
-                                    color="primary"
-                                    variant="headline"
-                                    component="h3"
-                                    >Add Contact
-                                </Typography>
-                                <ListItemIcon>
-                                    <BorderColorIcon style = {{color: '#1DE9B6', marginLeft: '10px'}} />
-                                </ListItemIcon>
-                            </div>
-                            <form
-                                onSubmit = {this.handleSubmit}
-                                autoComplete="off"
-                                className = {classes.form}>
-                                <TextField
-                                    name="name"
-                                    type="text"
-                                    autoFocus
-                                    onChange={this.handleChange('name')}
-                                    required
-                                    className={classes.textField}
-                                    label="Name"
-                                    helperText="Enter the contact name"
-                                    value={name}
-                                    margin="normal"
-                                    style = {{width: 'calc(75% - 15px)', marginRight: '30px'}}
-                                    />
-                                <TextField
-                                    name="sex"
-                                    onChange={this.handleChange('sex')}
-                                    className={classes.textField}
-                                    label="Sex"
-                                    helperText="Select"
-                                    select
-                                    value={sex}
-                                    margin="normal"
-                                    style = {{width: 'calc(25% - 15px)', verticalAlign: 'top'}}>
-                                        {sexValues.map(sexValue => (
-                                                <MenuItem key={sexValue} value={sexValue}>
-                                                  {sexValue}
-                                                </MenuItem>
-                                            ))}
-                                </TextField>
-                                <TextField
-                                    name="email"
-                                    type="email"
-                                    onChange={this.handleChange('email')}
-                                    required
-                                    className={classes.textField}
-                                    label="Email"
-                                    helperText="Enter the contact email"
-                                    value={email}
-                                    margin="normal"
-                                    style = {{width: 'calc(50% - 15px)', marginRight: '30px'}}
-                                    />
-                                <FormControl
-                                    name="phone"
-                                    required
-                                    className={classes.formControl}
-                                    margin="normal"
-                                    style = {{width: 'calc(50% - 15px)', verticalAlign: 'top'}}>
-                                  <InputLabel htmlFor="formatted-text-mask-input">Phone</InputLabel>
-                                  <Input
-                                    value={phone}
-                                    onChange={this.handleChange('phone')}
-                                    inputComponent={TextMaskCustom}
-                                    />
-                                <FormHelperText>Enter the contact phone</FormHelperText>
-                                </FormControl>
-                                <Button
-                                    type="submit"
-                                    disabled = {false}
-                                    variant="flat"
-                                    size="large"
-                                    color="primary"
-                                    fullWidth = {true}
-                                    className = {classes.submit}>
-                                    S u b m i t
-                                </Button>
-                            </form>
-                        </Paper>
-                    </Grid>
-                </Grid>
-            </MuiThemeProvider>
+            <Consumer>
+                {value => {
+                    return (
+                        <MuiThemeProvider theme={theme}>
+                            <Grid
+                                container
+                                spacing={24}
+                                className = {classes.gridContainer}>
+                                <Grid item xs={10} sm={7} md={6} lg={5} xl={5}>
+                                    <Paper className = {classes.paper}>
+                                        <div className = {classes.formHeadline}>
+                                            <Typography
+                                                color="primary"
+                                                variant="headline"
+                                                component="h3"
+                                                >Add Contact
+                                            </Typography>
+                                            <ListItemIcon>
+                                                <BorderColorIcon style = {{color: '#1DE9B6', marginLeft: '10px'}} />
+                                            </ListItemIcon>
+                                        </div>
+                                        <form
+                                            onSubmit = {this.handleSubmit.bind(this, value.dispatch)}
+                                            autoComplete="off"
+                                            className = {classes.form}>
+                                            <TextField
+                                                name="name"
+                                                type="text"
+                                                autoFocus
+                                                onChange={this.handleChange('name')}
+                                                required
+                                                className={classes.textField}
+                                                label="Name"
+                                                helperText="Enter the contact name"
+                                                value={name}
+                                                margin="normal"
+                                                style = {{width: 'calc(75% - 15px)', marginRight: '30px'}}
+                                                />
+                                            <TextField
+                                                name="sex"
+                                                onChange={this.handleChange('sex')}
+                                                className={classes.textField}
+                                                label="Sex"
+                                                helperText="Select"
+                                                select
+                                                value={sex}
+                                                margin="normal"
+                                                style = {{width: 'calc(25% - 15px)', verticalAlign: 'top'}}>
+                                                    {sexValues.map(sexValue => (
+                                                            <MenuItem key={sexValue} value={sexValue}>
+                                                              {sexValue}
+                                                            </MenuItem>
+                                                        ))}
+                                            </TextField>
+                                            <TextField
+                                                name="email"
+                                                type="email"
+                                                onChange={this.handleChange('email')}
+                                                required
+                                                className={classes.textField}
+                                                label="Email"
+                                                helperText="Enter the contact email"
+                                                value={email}
+                                                margin="normal"
+                                                style = {{width: 'calc(50% - 15px)', marginRight: '30px'}}
+                                                />
+                                            <FormControl
+                                                name="phone"
+                                                required
+                                                className={classes.formControl}
+                                                margin="normal"
+                                                style = {{width: 'calc(50% - 15px)', verticalAlign: 'top'}}>
+                                              <InputLabel htmlFor="formatted-text-mask-input">Phone</InputLabel>
+                                              <Input
+                                                value={phone}
+                                                onChange={this.handleChange('phone')}
+                                                inputComponent={TextMaskCustom}
+                                                />
+                                            <FormHelperText>Enter the contact phone</FormHelperText>
+                                            </FormControl>
+                                            <Button
+                                                type="submit"
+                                                disabled = {false}
+                                                variant="flat"
+                                                size="large"
+                                                color="primary"
+                                                fullWidth = {true}
+                                                className = {classes.submit}>
+                                                S u b m i t
+                                            </Button>
+                                        </form>
+                                    </Paper>
+                                </Grid>
+                            </Grid>
+                        </MuiThemeProvider>
+                    )
+                }}
+            </Consumer>
         )
     }
 }

@@ -8,6 +8,7 @@ import NavigationIcon from '@material-ui/icons/Navigation'
 import PhoneIcon from '@material-ui/icons/Phone'
 import DraftsIcon from '@material-ui/icons/Drafts'
 import ClearIcon from '@material-ui/icons/Clear'
+import PersonIcon from '@material-ui/icons/Person'
 import { Consumer } from '../../context'
 
 const styles = theme => ({
@@ -103,6 +104,18 @@ class Contact extends React.Component {
             contactInfo =
                 <Paper className = {classes.paper2}>
                     <List component="nav" className = {classes.list}>
+                        {contact.sex !== undefined && contact.sex !== '' ?
+                            <ListItem>
+                                <Hidden xsDown>
+                                  <ListItemIcon>
+                                    <PersonIcon />
+                                  </ListItemIcon>
+                                </Hidden>
+                                <ListItemText primary={`Sex: ${contact.sex}`} />
+                            </ListItem>
+                            :
+                            null
+                        }
                           <ListItem>
                               <Hidden xsDown>
                                 <ListItemIcon>
