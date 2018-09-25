@@ -3,7 +3,19 @@ import PropTypes from 'prop-types'
 import MaskedInput from 'react-text-mask'
 import { theme } from '../../Styles/Theme'
 import { withStyles, MuiThemeProvider } from '@material-ui/core/styles'
-import { Grid, Paper, Button, Typography, TextField, MenuItem, FormControl, InputLabel, Input, ListItemIcon } from '@material-ui/core'
+import {
+    Grid,
+    Paper,
+    Button,
+    Typography,
+    TextField,
+    MenuItem,
+    FormControl,
+    InputLabel,
+    Input,
+    ListItemIcon,
+    FormHelperText
+} from '@material-ui/core'
 import BorderColorIcon from '@material-ui/icons/BorderColor'
 
 const styles = theme => ({
@@ -14,13 +26,11 @@ const styles = theme => ({
     marginTop: '40px'
   },
   paper: {
-      padding: theme.spacing.unit * 2,
-
+      padding: theme.spacing.unit * 2.5,
   },
   formHeadline: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'flex-start',
     textTransform: 'uppercase'
   },
   form: {
@@ -34,13 +44,7 @@ const styles = theme => ({
   },
   submit: {
       marginTop: '25px'
-  },
-  dense: {
-    marginTop: 19,
-  },
-  menu: {
-    width: 200,
-  },
+  }
 });
 
 function TextMaskCustom(props) {
@@ -53,11 +57,12 @@ function TextMaskCustom(props) {
       mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/]}
       placeholderChar={'\u2000'}
       showMask
-    />
+      />
   );
 }
 
 const sexValues = ['Male', 'Female', 'Indefinite'];
+
 
 class AddContact extends React.Component {
 
@@ -102,6 +107,8 @@ class AddContact extends React.Component {
                                 autoComplete="off"
                                 className = {classes.form}>
                                 <TextField
+                                    name="name"
+                                    autoFocus
                                     onChange={this.handleChange('name')}
                                     required
                                     className={classes.textField}
@@ -112,9 +119,11 @@ class AddContact extends React.Component {
                                     style = {{width: 'calc(75% - 15px)', marginRight: '30px'}}
                                     />
                                 <TextField
+                                    name="sex"
                                     onChange={this.handleChange('sex')}
                                     className={classes.textField}
                                     label="Sex"
+                                    helperText="Select"
                                     select
                                     value={sex}
                                     margin="normal"
@@ -126,7 +135,10 @@ class AddContact extends React.Component {
                                             ))}
                                 </TextField>
                                 <TextField
+                                    name="email"
+                                    type="email"
                                     onChange={this.handleChange('email')}
+                                    required
                                     className={classes.textField}
                                     label="Email"
                                     helperText="Enter the contact email"
@@ -135,6 +147,7 @@ class AddContact extends React.Component {
                                     style = {{width: 'calc(50% - 15px)', marginRight: '30px'}}
                                     />
                                 <FormControl
+                                    name="phone"
                                     className={classes.formControl}
                                     margin="normal"
                                     style = {{width: 'calc(50% - 15px)', verticalAlign: 'top'}}>
@@ -144,6 +157,7 @@ class AddContact extends React.Component {
                                     onChange={this.handleChange('phone')}
                                     inputComponent={TextMaskCustom}
                                     />
+                                <FormHelperText>Enter the contact phone</FormHelperText>
                                 </FormControl>
                                 <Button
                                     disabled = {false}
