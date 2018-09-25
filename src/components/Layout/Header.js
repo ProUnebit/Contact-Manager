@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { theme } from '../../Styles/Theme'
 import { withStyles } from '@material-ui/core/styles'
 import { AppBar, Toolbar, Typography, Button, IconButton } from '@material-ui/core'
@@ -39,8 +39,10 @@ const header = (props) => {
               position="static">
                 <Toolbar variant="dense">
                   <IconButton
-                      className={classes.menuButton}
-                      aria-label="Home">
+                      component={Link}
+                      to="/"
+                      aria-label="Home"
+                      className={classes.menuButton}>
                     <HomeIcon />
                   </IconButton>
                   <Typography
@@ -49,14 +51,23 @@ const header = (props) => {
                       className={classes.grow}
                       >{props.branding}
                   </Typography>
-                  <Button color="inherit">Add Contact +</Button>
+                  <Button
+                      component={Link}
+                      to="/contact/add"
+                      color="inherit"
+                      >Add Contact +
+                  </Button>
+                  <Button
+                      component={Link}
+                      to="/about"
+                      color="inherit"
+                      >About
+                  </Button>
                 </Toolbar>
             </AppBar>
         </div>
     )
 }
-
-// <Button component={Link} to="/add-contact" color="inherit">Add Contact +</Button>
 
 header.defaultProps = {
     branding: 'My App'
