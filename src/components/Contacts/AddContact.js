@@ -34,15 +34,6 @@ const styles = theme => ({
     alignItems: 'center',
     textTransform: 'uppercase'
   },
-  form: {
-
-  },
-  textField: {
-
-  },
-  formControl: {
-
-  },
   submit: {
       marginTop: '25px'
   }
@@ -83,10 +74,12 @@ class AddContact extends React.Component {
     handleSubmit = (dispatch, event) => {
         // Submited form, generated ID and pushed 'newContact' to STORE
         event.preventDefault();
+        
         const newContact = {
             ...this.state,
             id: ([this.state.name] + '-' + (Math.random() * 10).toFixed(5).split('.').join('')).split(' ').join('')
         }
+
         console.log(newContact)
 
         dispatch({type: 'ADD_CONTACT', payload: newContact})
@@ -128,15 +121,13 @@ class AddContact extends React.Component {
                                         </div>
                                         <form
                                             onSubmit = {this.handleSubmit.bind(this, value.dispatch)}
-                                            autoComplete="off"
-                                            className = {classes.form}>
+                                            autoComplete="off">
                                             <TextField
                                                 name="name"
                                                 type="text"
                                                 autoFocus
                                                 onChange={this.handleChange('name')}
                                                 required
-                                                className={classes.textField}
                                                 label="Name"
                                                 helperText="Enter the contact name"
                                                 value={name}
@@ -146,7 +137,6 @@ class AddContact extends React.Component {
                                             <TextField
                                                 name="sex"
                                                 onChange={this.handleChange('sex')}
-                                                className={classes.textField}
                                                 label="Sex"
                                                 helperText="Select"
                                                 select
@@ -164,7 +154,6 @@ class AddContact extends React.Component {
                                                 type="email"
                                                 onChange={this.handleChange('email')}
                                                 required
-                                                className={classes.textField}
                                                 label="Email"
                                                 helperText="Enter the contact email"
                                                 value={email}
@@ -174,7 +163,6 @@ class AddContact extends React.Component {
                                             <FormControl
                                                 name="phone"
                                                 required
-                                                className={classes.formControl}
                                                 margin="normal"
                                                 style = {{width: 'calc(50% - 15px)', verticalAlign: 'top'}}>
                                               <InputLabel htmlFor="formatted-text-mask-input">Phone</InputLabel>

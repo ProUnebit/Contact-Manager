@@ -22,28 +22,31 @@ const reducer = (state, action) => {
 export class Provider extends React.Component {
 
     state = {
+        // Fake data
         contacts: [
             {
                 id: 1,
-                name: 'John Doe',
-                email: 'jdoe@gmail.com',
+                name: 'John Lennon',
+                email: 'jlenon@gmail.com',
                 phone: '555-55-5555'
             },
             {
                 id: 2,
-                name: 'Marry Jane',
+                name: 'Mary Jane',
+                sex: 'Female',
                 email: 'mjane@gmail.com',
                 phone: '666-66-6666'
             },
             {
                 id: 3,
-                name: 'Brad Traversy',
-                email: 'btraversy@gmail.com',
+                name: 'Elon Musk',
+                email: 'emusk@gmail.com',
                 phone: '777-77-7777'
             },
             {
                 id: 4,
                 name: 'Alexey Ratnikov',
+                sex: 'Male',
                 email: 'aratnikov@gmail.com',
                 phone: '888-88-8888'
             }

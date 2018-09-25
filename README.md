@@ -1,1 +1,1 @@
-**Version:** 0.6 alfa
+**Version:** 0.7 alfa
