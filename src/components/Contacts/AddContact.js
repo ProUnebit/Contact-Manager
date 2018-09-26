@@ -72,7 +72,7 @@ class AddContact extends React.Component {
     });
     };
 
-    handleSubmit = (dispatch, event) => {
+    handleSubmit = async (dispatch, event) => {
         // Submited form, generated ID and pushed 'newContact' to STORE
         event.preventDefault();
 
@@ -81,8 +81,8 @@ class AddContact extends React.Component {
             id: ([this.state.name] + '-' + (Math.random() * 10).toFixed(5).split('.').join('')).split(' ').join('')
         }
         // post newContact to jsonplaceholder
-        axios.post('https://jsonplaceholder.typicode.com/users', newContact)
-            .then(res => dispatch({type: 'ADD_CONTACT', payload: res.data}))
+        const res = await axios.post('https://jsonplaceholder.typicode.com/users', newContact)
+            dispatch({type: 'ADD_CONTACT', payload: res.data})
 
         // clear state under form-submit
         this.setState({

@@ -1,9 +1,9 @@
 import React from 'react'
 import axios from 'axios'
 
-const instance = axios.create({
-    baseURL: 'https://jsonplaceholder.typicode.com/'
-})
+// const instance = axios.create({
+//     baseURL: 'https://jsonplaceholder.typicode.com/'
+// })
 
 const Context = React.createContext();
 
@@ -59,11 +59,13 @@ export class Provider extends React.Component {
         dispatch: action => this.setState(state => reducer(state, action))
     }
 
-    componentDidMount() {
-        axios.get('https://jsonplaceholder.typicode.com/users')
-            .then(res => this.setState({
-                contacts: res.data
-            }))
+    async componentDidMount() {
+        const res = await axios.get('https://jsonplaceholder.typicode.com/users')
+        
+        this.setState({
+            contacts: res.data
+        });
+
     }
 
     render() {
