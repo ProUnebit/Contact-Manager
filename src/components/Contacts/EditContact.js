@@ -66,10 +66,26 @@ class EditContact extends React.Component {
         phone: '(   )    -    ',
     }
 
+    async componentDidMount() {
+        const { id } = this.props.match.params;
+
+
+        const res = await axios.get(`https://jsonplaceholder.typicode.com/users/${id}`);
+
+        const contact = res.data;
+
+        this.setState({
+            name: contact.name,
+            sex: contact.sex,
+            email: contact.email,
+            phone: contact.phone
+        });
+    }
+
     handleChange = name => event => {
-    this.setState({
-      [name]: event.target.value,
-    });
+        this.setState({
+          [name]: event.target.value,
+        });
     };
 
     handleSubmit = async (dispatch, event) => {

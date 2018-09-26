@@ -49,12 +49,13 @@ const styles = theme => ({
   },
   title: {
       color: theme.palette.text.primary,
-      padding: theme.spacing.unit * 1.5,
+      padding: theme.spacing.unit * 1.8,
       gridColumn: '3 / 5',
   },
   button: {
       gridColumn: '5 / 6',
       alignSelf: 'end',
+      height: '40px'
   },
   list: {
       listStyle: 'none',
