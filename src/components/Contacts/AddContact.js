@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import axios from 'axios'
 import MaskedInput from 'react-text-mask'
 import { Consumer } from '../../context'
 import { theme } from '../../Styles/Theme'
@@ -79,8 +80,10 @@ class AddContact extends React.Component {
             ...this.state,
             id: ([this.state.name] + '-' + (Math.random() * 10).toFixed(5).split('.').join('')).split(' ').join('')
         }
+        // post newContact to jsonplaceholder
+        axios.post('https://jsonplaceholder.typicode.com/users', newContact)
+            .then(res => dispatch({type: 'ADD_CONTACT', payload: res.data}))
 
-        dispatch({type: 'ADD_CONTACT', payload: newContact})
         // clear state under form-submit
         this.setState({
             name: '',

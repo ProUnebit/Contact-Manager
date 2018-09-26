@@ -6,6 +6,7 @@ import { withStyles, MuiThemeProvider } from '@material-ui/core/styles'
 import { deepOrange } from '@material-ui/core/colors'
 import { Phone, Drafts, Clear, Person, ExpandLess } from '@material-ui/icons'
 import { Consumer } from '../../context'
+import axios from 'axios'
 
 const styles = theme => ({
   root: {
@@ -78,7 +79,8 @@ class Contact extends React.Component {
     }
 
     onDeleteClick = (id, dispatch) => {
-        dispatch({type: 'DELETE_CONTACT', payload: id})
+        axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`)
+            .then(res => dispatch({type: 'DELETE_CONTACT', payload: id}))
     }
 
     render () {
