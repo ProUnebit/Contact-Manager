@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import axios from 'axios'
 import MaskedInput from 'react-text-mask'
 import { Consumer } from '../../context'
@@ -67,19 +67,40 @@ class EditContact extends React.Component {
     }
 
     async componentDidMount() {
+
         const { id } = this.props.match.params;
 
+        // console.log(this.props)
 
-        const res = await axios.get(`https://jsonplaceholder.typicode.com/users/${id}`);
+        // const res = await axios.get('https://jsonplaceholder.typicode.com/users')
+        //
+        // this.setState({
+        //     contacts: res.data
+        // });
 
-        const contact = res.data;
+        // console.log(this.state)
 
-        this.setState({
-            name: contact.name,
-            sex: contact.sex,
-            email: contact.email,
-            phone: contact.phone
-        });
+        try {
+            const res = await axios.get(`https://jsonplaceholder.typicode.com/users/${id}`);
+
+            const contact = res.data;
+
+            this.setState({
+                name: contact.name,
+                sex: contact.sex,
+                email: contact.email,
+                phone: contact.phone
+            });
+
+        } catch (e) {
+
+            this.setState({
+                name: 'Error',
+                sex: '',
+                email: 'Error',
+                phone: '(   )    -    '
+            });
+        }
     }
 
     handleChange = name => event => {
@@ -91,6 +112,21 @@ class EditContact extends React.Component {
     handleSubmit = async (dispatch, event) => {
         // Submited form, generated ID and pushed 'newContact' to STORE
         event.preventDefault();
+
+        const { name, sex, email, phone } = this.state
+        const { id } = this.props.match.params
+
+        const updatedContact = {
+            name,
+            sex,
+            email,
+            phone
+        }
+
+
+        const res = await axios.put(`https://jsonplaceholder.typicode.com/users/${id}`, updatedContact)
+
+        dispatch({type: 'UPDATE_CONTACT', payload: res.data})
 
         // clear state under form-submit
         this.setState({
@@ -205,12 +241,12 @@ class EditContact extends React.Component {
     }
 }
 
-TextMaskCustom.propTypes = {
-  inputRef: PropTypes.func.isRequired,
-};
-
-EditContact.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
+// TextMaskCustom.propTypes = {
+//   inputRef: PropTypes.func.isRequired,
+// };
+//
+// EditContact.propTypes = {
+//   classes: PropTypes.object.isRequired,
+// };
 
 export default withStyles(styles)(EditContact);

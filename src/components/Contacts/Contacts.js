@@ -1,25 +1,14 @@
 import React from 'react'
 import Contact from './Contact'
 import { Consumer } from '../../context'
-import { Typography } from '@material-ui/core';
+import { Typography, CircularProgress } from '@material-ui/core';
 
 class Contacts extends React.Component {
-
-    // state = {
-    //     loading: true
-    // }
-
-    componentDidMount() {
-        // setTimeout(() => {
-        //     this.setState({
-        //         loading: false
-        //     });
-        // }, 2000)
-    }
 
     render () {
 
         let contactList = value => (
+                !value.loading ?
                 <React.Fragment>
                         <Typography
                             variant="display1"
@@ -40,11 +29,17 @@ class Contacts extends React.Component {
                         )
                     })}
                 </React.Fragment>
+                :
+                <CircularProgress
+                    color="secondary"
+                    thickness = {8}
+                    size = {160}
+                    style = {{
+                        display: 'block',
+                        margin: '150px auto',
+                        color: '#1DE9B6'
+                    }}/>
                 )
-
-        // if (this.state.loading) {
-        //     contactList = value => <LinearProgress color="secondary" style = {{marginTop: 5, backgroundColor: '#64FFDA'}}/>
-        // }
 
         return <Consumer>{contactList}</Consumer>
     }

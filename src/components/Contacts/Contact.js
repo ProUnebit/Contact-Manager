@@ -1,10 +1,21 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { theme } from '../../Styles/Theme'
-import { Paper, Grid, Button, IconButton, List, ListItem, ListItemIcon, ListItemText, Tooltip, Zoom, Hidden } from '@material-ui/core'
+import {
+    Paper,
+    Grid,
+    Button,
+    List,
+    ListItem,
+    ListItemIcon,
+    ListItemText,
+    Tooltip,
+    Zoom,
+    Hidden,
+    LinearProgress
+ } from '@material-ui/core'
 import { withStyles, MuiThemeProvider } from '@material-ui/core/styles'
-import { deepOrange } from '@material-ui/core/colors'
 import { Phone, Drafts, Clear, Person, ExpandLess, PlaylistAdd } from '@material-ui/icons'
 import { Consumer } from '../../context'
 import axios from 'axios'
@@ -25,13 +36,14 @@ const styles = theme => ({
   },
   paper2: {
     marginTop: '15px',
-    backgroundColor: deepOrange[50],
+    backgroundColor: '#E0F2F1',
     overflow: 'hidden',
   },
   contact: {
       display: 'grid',
       gridTemplateColumns: 'repeat(2, 70px) repeat(2, minmax(60px, 1fr)) minmax(60px, 80px)',
       gridTemplateRows: 'auto',
+      marginTop: 5
   },
   clear: {
       gridColumn: '1 / 2',
@@ -80,8 +92,15 @@ class Contact extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            showContactInfo: false
+            showContactInfo: false,
+            loading: false
         }
+    }
+
+    componentDidMount() {
+        // this.setState({
+        //     loading: false
+        // });
     }
 
     onShowCLick = () => {
@@ -90,11 +109,12 @@ class Contact extends React.Component {
         }));
     }
 
-    onEditClick = () => {
-        console.log('hi')
-    }
-
     onDeleteClick = async (id, dispatch) => {
+
+        this.setState({
+            loading: true
+        });
+
         try {
 
             await axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`)
@@ -104,12 +124,16 @@ class Contact extends React.Component {
 
             dispatch({type: 'DELETE_CONTACT', payload: id})
         }
+
+        this.setState({
+            loading: false
+        });
     }
 
     render () {
 
         const { classes, contact, marginTop } = this.props;
-        const { showContactInfo } = this.state;
+        const { showContactInfo, loading } = this.state;
 
         let navigationIcon = !showContactInfo ?
         {transform: 'rotate(180deg)', marginRight: theme.spacing.unit / 1.8}
@@ -175,6 +199,7 @@ class Contact extends React.Component {
                                     style = {marginTop}
                                     > <Grid item xs={10} sm={7} md={6} lg={4} xl={4}>
                                           <Paper className = {classes.paper1}>
+                                              {loading ? <LinearProgress color="secondary" style = {{marginTop: '-5px'}}/> : null}
                                               <div className = {classes.contact}>
                                                   <Tooltip
                                                       classes = {{tooltip: classes.lightTooltip}}
@@ -242,8 +267,8 @@ class Contact extends React.Component {
     }
 }
 
-Contact.propTypes = {
-    contact: PropTypes.object.isRequired
-}
+// Contact.propTypes = {
+//     contact: PropTypes.object.isRequired
+// }
 
 export default withStyles(styles)(Contact);

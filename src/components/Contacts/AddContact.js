@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import axios from 'axios'
 import MaskedInput from 'react-text-mask'
 import { Consumer } from '../../context'
@@ -197,12 +197,12 @@ class AddContact extends React.Component {
     }
 }
 
-TextMaskCustom.propTypes = {
-  inputRef: PropTypes.func.isRequired,
-};
-
-AddContact.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
+// TextMaskCustom.propTypes = {
+//   inputRef: PropTypes.func.isRequired,
+// };
+//
+// AddContact.propTypes = {
+//   classes: PropTypes.object.isRequired,
+// };
 
 export default  withStyles(styles)(AddContact);
