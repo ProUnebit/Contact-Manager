@@ -32,7 +32,7 @@ class Contacts extends React.Component {
                 :
                 <CircularProgress
                     color="secondary"
-                    thickness = {8}
+                    thickness = {7}
                     size = {160}
                     style = {{
                         display: 'block',

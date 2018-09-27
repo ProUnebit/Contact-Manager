@@ -41,7 +41,7 @@ const styles = theme => ({
   },
   contact: {
       display: 'grid',
-      gridTemplateColumns: 'repeat(2, 70px) repeat(2, minmax(60px, 1fr)) minmax(60px, 80px)',
+      gridTemplateColumns: 'repeat(2, 70px) repeat(2, minmax(60px, 1fr)) minmax(55px, 85px)',
       gridTemplateRows: 'auto',
       marginTop: 5
   },
@@ -60,21 +60,21 @@ const styles = theme => ({
       padding: theme.spacing.unit / 2,
   },
   title: {
-      color: theme.palette.text.primary,
+      color: theme.palette.text.secondary,
       padding: theme.spacing.unit * 1.8,
       gridColumn: '3 / 5',
   },
   button: {
       gridColumn: '5 / 6',
       alignSelf: 'end',
-      height: '40px'
+      height: '40px',
   },
   list: {
       listStyle: 'none',
       textAlign: 'left',
   },
   listItem: {
-      // color: theme.palette.primary.contrastText,
+
   },
   extendedIcon: {
       fontSize: '20px',
@@ -197,7 +197,7 @@ class Contact extends React.Component {
                                     spacing={24}
                                     className = {classes.gridContainer}
                                     style = {marginTop}
-                                    > <Grid item xs={10} sm={7} md={6} lg={4} xl={4}>
+                                    > <Grid item xs={11} sm={7} md={6} lg={4} xl={4}>
                                           <Paper className = {classes.paper1}>
                                               {loading ? <LinearProgress color="secondary" style = {{marginTop: '-5px'}}/> : null}
                                               <div className = {classes.contact}>
@@ -243,13 +243,14 @@ class Contact extends React.Component {
                                                   <h2 className = {classes.title}>{contact.name}</h2>
                                                   <Button
                                                       onClick = {this.onShowCLick}
-                                                      color="secondary"
-                                                      variant="extendedFab"
+                                                      color="primary"
+                                                      variant="outlined"
                                                       size="small"
                                                       className = {classes.button}>
                                                       <ExpandLess
                                                           fontSize="small"
                                                           className = {classes.extendedIcon}
+                                                          color="secondary"
                                                           style = {navigationIcon}
                                                           />
                                                       {!showContactInfo ? 'Show' : 'Hide'}

@@ -12,6 +12,6 @@ export const theme = createMuiTheme({
     secondary: {
         light: pink['A400'],
         main: teal['A400'],
-    }
+    },
   }
 });
