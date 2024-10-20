@@ -1,4 +1,4 @@
-[Test Link (Demo version)](https://jovial-wescoff-751deb.netlify.com/)
+[Test Link (Demo version)](https://jovial-wescoff-751deb.netlify.app)
 
 **Version:** 1.1 beta
 
